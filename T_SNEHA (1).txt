@@ -1,0 +1,104 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "T.SNEHA.ipynb",
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "-My_8prSCbYc",
+        "outputId": "770d4ebe-83b7-4c1e-f366-439fdd9def74"
+      },
+      "source": [
+        "import requests\n",
+        "\n",
+        "#import os\n",
+        "\n",
+        "from datetime import datetime\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "api_key = '29aa836da350699d0c0e4d6cf49cd01e'\n",
+        "\n",
+        "location = input(\"Enter the city name: \")\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "complete_api_link = \"https://api.openweathermap.org/data/2.5/weather?q=\"+location+\"&appid=\"+api_key\n",
+        "\n",
+        "api_link = requests.get(complete_api_link)\n",
+        "\n",
+        "api_data = api_link.json()\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "#create variables to store and display data\n",
+        "\n",
+        "temp_city = ((api_data['main']['temp']) - 273.15)\n",
+        "\n",
+        "weather_desc = api_data['weather'][0]['description']\n",
+        "\n",
+        "hmdt = api_data['main']['humidity']\n",
+        "\n",
+        "wind_spd = api_data['wind']['speed']\n",
+        "\n",
+        "date_time = datetime.now().strftime(\"%d %b %Y | %I:%M:%S %p\")\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "print (\"-------------------------------------------------------------\")\n",
+        "\n",
+        "print (\"Weather Stats for - {} || {}\".format(location.upper(), date_time))\n",
+        "\n",
+        "print (\"-------------------------------------------------------------\")\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "print (\"Current temperature is: {:.2f} deg C\".format(temp_city))\n",
+        "\n",
+        "print (\"Current weather desc :\",weather_desc)\n",
+        "\n",
+        "print (\"Current Humidity :\",hmdt, '%')\n",
+        "\n",
+        "print (\"Current wind speed :\",wind_spd ,'kmph')\n"
+      ],
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Enter the city name: coimbatore\n",
+            "-------------------------------------------------------------\n",
+            "Weather Stats for - COIMBATORE || 23 Jun 2021 | 10:48:51 AM\n",
+            "-------------------------------------------------------------\n",
+            "Current temperature is: 31.88 deg C\n",
+            "Current weather desc : scattered clouds\n",
+            "Current Humidity : 51 %\n",
+            "Current wind speed : 3.09 kmph\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    }
+  ]
+}
